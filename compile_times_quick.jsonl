@@ -1,0 +1,11 @@
+{"model": "meta-llama/Meta-Llama-3-70B", "status": "ok", "compile_time": 37.87, "load_time": 70.99415266001597, "gen_time": 0.5576721850084141, "wall_time": 84.09714507800527, "timestamp": "2026-04-28T16:13:59.097179"}
+{"model": "openai/gpt-oss-120b", "status": "ok", "compile_time": 22.58, "load_time": 87.433285659994, "gen_time": 0.30085437797242776, "wall_time": 99.69743282202398, "timestamp": "2026-04-28T16:15:38.795401"}
+{"model": "deepseek-ai/DeepSeek-V3.2", "status": "failed", "compile_time": -1.0, "wall_time": 46.840151384996716, "exit_code": 1, "timestamp": "2026-04-28T16:16:25.637720"}
+{"model": "moonshotai/Kimi-K2.6", "status": "ok", "compile_time": 27.88, "load_time": 74.62398317502812, "gen_time": 0.4898163610487245, "wall_time": 88.1669667820097, "timestamp": "2026-04-28T16:17:53.805212"}
+{"model": "zai-org/GLM-4.7", "status": "timeout", "timestamp": "2026-04-28T17:17:53.938539"}
+{"model": "Qwen/Qwen3.6-35B-A3B", "status": "failed", "compile_time": -1.0, "wall_time": 48.811527625017334, "exit_code": 1, "timestamp": "2026-04-28T17:18:42.751412"}
+{"model": "Qwen/Qwen3.6-35B-A3B", "status": "ok", "compile_time": 50.87, "load_time": 206.7231501559727, "gen_time": 1.0169488079845905, "wall_time": 220.51750593498582, "timestamp": "2026-04-28T17:26:17.176179"}
+{"model": "zai-org/GLM-4.7", "status": "failed", "compile_time": -1.0, "wall_time": 36.98305434396025, "exit_code": 1, "timestamp": "2026-04-28T17:26:57.286315"}
+{"model": "zai-org/GLM-4.7", "status": "failed", "compile_time": 11.67, "wall_time": 64.15248095197603, "exit_code": 1, "timestamp": "2026-04-28T17:29:21.886181"}
+{"model": "deepseek-ai/DeepSeek-V3.2", "status": "failed", "compile_time": -1.0, "wall_time": 48.72941715398338, "timestamp": "2026-04-28T17:31:41.309329"}
+{"model": "deepseek-ai/DeepSeek-V3.2", "status": "failed", "compile_time": 67.76, "wall_time": 143.9438836160116, "timestamp": "2026-04-28T18:43:25.545477"}
