@@ -526,8 +526,12 @@ def main():
     args = parse_args()
 
     hf_token = os.environ.get("HF_TOKEN", "")
-    if hf_token:
-        download_models_metadata(args.models, hf_token)
+    if not hf_token:
+        print("ERROR: HF_TOKEN environment variable is not set.")
+        print("Set it with: export HF_TOKEN=hf_your_token_here")
+        print("Get a token at: https://huggingface.co/settings/tokens")
+        sys.exit(1)
+    download_models_metadata(args.models, hf_token)
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_path = args.output or f"compile_bench_{timestamp}.csv"

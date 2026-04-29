@@ -60,9 +60,8 @@ def kill_gpu_processes():
         print(f"  Killed {len(pids)} GPU processes")
 
 
-def run_model(model, timeout=7200):
+def run_model(model, hf_token, timeout=7200):
     kill_gpu_processes()
-    hf_token = os.environ.get("HF_TOKEN", "")
     script = WORKER.format(hf_token=hf_token, model=model)
 
     print(f"\n{'='*60}")
@@ -123,11 +122,18 @@ def run_model(model, timeout=7200):
 
 
 def main():
+    hf_token = os.environ.get("HF_TOKEN", "")
+    if not hf_token:
+        print("ERROR: HF_TOKEN environment variable is not set.")
+        print("Set it with: export HF_TOKEN=hf_your_token_here")
+        print("Get a token at: https://huggingface.co/settings/tokens")
+        sys.exit(1)
+
     print(f"Quick compile time extraction — {datetime.now()}")
     print(f"Results appended to: {RESULTS_FILE}")
 
     for model in MODELS:
-        result = run_model(model)
+        result = run_model(model, hf_token)
         result["timestamp"] = datetime.now().isoformat()
 
         with open(RESULTS_FILE, "a") as f:
