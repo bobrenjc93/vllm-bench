@@ -152,6 +152,7 @@ else
     conda create -n "$CONDA_ENV_NAME" python="$PYTHON_VERSION" -y
 fi
 conda activate "$CONDA_ENV_NAME"
+export CUDA_HOME="/usr/local/cuda-${CUDA_VERSION}"
 
 log "Python: $(python --version)"
 pip install -q ninja cmake wheel setuptools setuptools_scm pyyaml typing-extensions 2>/dev/null
