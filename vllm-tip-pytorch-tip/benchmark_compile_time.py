@@ -22,6 +22,7 @@ import logging
 import os
 import re
 import select
+import signal
 import shutil
 import statistics
 import subprocess
@@ -155,6 +156,7 @@ _WORKER_SCRIPT = '''
 import json, sys, time, gc, os
 os.environ.setdefault("HF_TOKEN", "{hf_token}")
 os.environ.setdefault("DG_JIT_NVCC_COMPILER", "{dg_nvcc}")
+os.environ.setdefault("VLLM_WORKER_TIMEOUT", "600")
 import torch
 from vllm import LLM, SamplingParams
 
@@ -254,11 +256,21 @@ def run_benchmark_single(
     spinner.start()
 
     try:
-        proc = subprocess.run(
+        popen = subprocess.Popen(
             [sys.executable, "-c", script],
-            capture_output=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             text=True,
-            timeout=3600,
+            start_new_session=True,
+        )
+        try:
+            stdout, stderr = popen.communicate(timeout=3600)
+        except subprocess.TimeoutExpired:
+            os.killpg(os.getpgid(popen.pid), signal.SIGKILL)
+            popen.wait()
+            raise
+        proc = subprocess.CompletedProcess(
+            popen.args, popen.returncode, stdout, stderr,
         )
     finally:
         stop_spinner.set()
