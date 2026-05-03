@@ -35,7 +35,10 @@ for arg in "$@"; do
 done
 
 if [ "$REBUILD" -eq 1 ]; then
+    log "Force-rebuilding PyTorch and vLLM from latest source (use --skip-rebuild to reuse existing builds)"
     PASSTHROUGH_ARGS=("--force-rebuild" "${PASSTHROUGH_ARGS[@]+"${PASSTHROUGH_ARGS[@]}"}")
+else
+    log "Reusing existing builds (--skip-rebuild)"
 fi
 
 log "=== Running both benchmarks ==="
