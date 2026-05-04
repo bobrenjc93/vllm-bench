@@ -15,7 +15,19 @@ set -euo pipefail
 # ============================================================================
 # Configuration
 # ============================================================================
-HF_TOKEN="${HF_TOKEN:?Set HF_TOKEN env var (required for gated models like Meta-Llama)}"
+HF_TOKEN_CACHE="${HOME}/.cache/vllm-bench/hf_token"
+if [ -z "${HF_TOKEN:-}" ]; then
+    if [ -f "$HF_TOKEN_CACHE" ]; then
+        HF_TOKEN="$(cat "$HF_TOKEN_CACHE")"
+    else
+        echo "ERROR: Set HF_TOKEN env var (required for gated models like Meta-Llama)" >&2
+        exit 1
+    fi
+else
+    mkdir -p "$(dirname "$HF_TOKEN_CACHE")"
+    echo "$HF_TOKEN" > "$HF_TOKEN_CACHE"
+    chmod 600 "$HF_TOKEN_CACHE"
+fi
 CONDA_ENV_NAME="vllm_bench_release"
 PYTHON_VERSION="3.12"
 CUDA_VERSION="13.0"
